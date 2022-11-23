@@ -1,0 +1,1 @@
+library youcanpay_flutter_sdk;
