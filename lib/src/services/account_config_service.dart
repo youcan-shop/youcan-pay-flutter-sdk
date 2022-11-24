@@ -10,7 +10,7 @@ class AccountConfigService extends BasedService {
 
   Future<AccountConfig> getAccountConfig({required String pubKey}) async {
     try {
-      HttpResponse response = await httpAdapter.get(url: Constants.CONIFS_URL + pubKey);
+      HttpResponse response = await httpAdapter.get(url: Constants.CONFIG_URL + pubKey);
       accountConfig = AccountConfigFactory.fromJSON(response);
     } catch (e) {
       accountConfig = AccountConfig(success: false, message: e.toString());
