@@ -1,5 +1,5 @@
 class HttpResponse {
-  String body;
+  Map<String, dynamic> body;
   int statusCode;
   String message;
 
