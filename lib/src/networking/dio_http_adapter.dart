@@ -7,7 +7,7 @@ import 'http_adapter.dart';
 
 class DioHttpAdapter extends HttpAdapter {
   late Dio _dio;
-  final Map<String, dynamic> _header = {"Content-Type": "application/json"};
+  final Map<String, dynamic> _header = {"Content-Type": "application/json", "Accept": "application/json", "X-Preferred-Locale": "en"};
 
   DioHttpAdapter() {
     _dio = Dio(BaseOptions(baseUrl: Constants.BASE_URL, headers: _header));
