@@ -19,10 +19,9 @@ class CardInformation {
 
   Map<String, String> toMap() {
     return {
-      'cardHolderName': cardHolderName,
-      'cardNumber': cardNumber,
-      'expireDateYear': expireDateYear,
-      'expireDateMonth': expireDateMonth,
+      'card_holder_name': cardHolderName,
+      'credit_card': cardNumber,
+      'expire_date': "$expireDateMonth/$expireDateYear",
       'cvv': cvv,
     };
   }
