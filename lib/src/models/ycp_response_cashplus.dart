@@ -5,7 +5,6 @@ class YCPResponseCashPlus extends YCPayResponse {
 
   YCPResponseCashPlus({required super.transactionId, required this.token});
 
-  // to string
   @override
   String toString() {
     return 'YCPResponseCashPlus{transactionId: $transactionId, token: $token}';
