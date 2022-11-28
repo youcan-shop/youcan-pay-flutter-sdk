@@ -1,39 +1,32 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<p align="center"><a href="https://pay.youcan.shop" target="_blank"><img src="https://pay.youcan.shop/images/ycpay-logo.svg" width="400"></a></p>
+  
+  
+YouCanPay Flutter SDK makes it quick and easy to build an excellent payment experience in your Android & iOS apps with [YouCan Pay API](https://pay.youcan.shop/docs).
+We provide powerful and customizable UI screens to make your payment more easier
+## Basic Usage
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+###  Server-side
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+This integration requires endpoints on your server in order to communicate with YouCanPay API. Use our official libraries for access to the YouCanPay API from your server:  the following steps in our [Documentation](https://pay.youcan.shop/docs) will guide you through.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+### Install the YouCan Pay SDK :
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+Add youcanpay to your pubspec.yaml file:
+```yaml
+dependencies:
+  youcanpay: <version>
 ```
 
-## Additional information
+Or run following command line
+```sh
+flutter pub add youcanpay
+```
+#### Import it
+Now in your Dart code, you can use:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+import 'package:youcanpay_sdk/youcanpay_sdk.dart';
+```
+
+ ### Set up Payment :
+Coming soon...
