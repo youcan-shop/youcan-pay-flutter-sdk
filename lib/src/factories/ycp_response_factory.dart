@@ -27,7 +27,6 @@ class YCPResponseFactory {
 
       if (jsonObject.containsKey("redirect_url") && jsonObject.containsKey("return_url")) {
         ycPayResponse = YCPResponse3ds(
-          transactionId: jsonObject["transaction_id"],
           returnUrl: jsonObject["return_url"],
           redirectUrl: jsonObject["redirect_url"],
         );
@@ -37,7 +36,7 @@ class YCPResponseFactory {
 
       if (jsonObject.containsKey("token")) {
         ycPayResponse = YCPResponseCashPlus(
-          transactionId: jsonObject["transaction_id"],
+          transactionId: jsonObject["transaction_id"] ?? "",
           token: jsonObject["token"],
         );
 

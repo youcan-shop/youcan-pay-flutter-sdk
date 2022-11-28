@@ -4,10 +4,10 @@ class YCPResponse3ds extends YCPayResponse {
   String redirectUrl;
   String returnUrl;
 
-  YCPResponse3ds({required super.transactionId, required this.redirectUrl, required this.returnUrl});
+  YCPResponse3ds({required this.redirectUrl, required this.returnUrl});
 
   @override
   String toString() {
-    return 'YCPResponse3ds{transactionId: $transactionId, redirectUrl: $redirectUrl, returnUrl: $returnUrl}';
+    return 'YCPResponse3ds{redirectUrl: $redirectUrl, returnUrl: $returnUrl}';
   }
 }
