@@ -11,7 +11,6 @@ class YCPResponseFactory {
   static YCPayResponse fromJSON(HttpResponse response) {
     late YCPayResponse ycPayResponse;
     if(response.statusCode == -1){
-
       ycPayResponse = YCPResponseSale(
         transactionId:  "",
         success: false,
