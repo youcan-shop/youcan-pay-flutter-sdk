@@ -1,4 +1,5 @@
 class Constants {
-  static String BASE_URL = "https://run.mocky.io/v3/";
-  static String CONFIG_URL = "ec7547e6-43f0-448b-8ece-ef971c03b5e0";
+  static String BASE_URL = "https://youcanpay.com/api/";
+  static String CONFIG_URL = "get-account-configs/";
+  static String PAY_WITH_CARD_URL ="pay/";
 }

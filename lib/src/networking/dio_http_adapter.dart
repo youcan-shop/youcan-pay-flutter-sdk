@@ -7,11 +7,11 @@ import 'http_adapter.dart';
 
 class DioHttpAdapter extends HttpAdapter {
   late Dio _dio;
-  final Map<String, dynamic> _header = {"Content-Type": "application/json"};
+  final Map<String, dynamic> _header = {"Content-Type": "application/json", "Accept": "application/json", "X-Preferred-Locale": "en"};
 
   DioHttpAdapter() {
     _dio = Dio(BaseOptions(baseUrl: Constants.BASE_URL, headers: _header));
-    _dio.interceptors.add(PrettyDioLogger());
+    _dio.interceptors.add(PrettyDioLogger(requestBody: true));
   }
 
   @override
@@ -30,12 +30,12 @@ class DioHttpAdapter extends HttpAdapter {
   }
 
   @override
-  Future<HttpResponse> post({required String url, Map<String, String> params = const {}}) async {
+  Future<HttpResponse> post({required String url, Map<String, String> body = const {}}) async {
     Response response;
     HttpResponse httpResponse;
 
     try {
-      response = await _dio.post(url, queryParameters: params);
+      response = await _dio.post(url, data: body);
       httpResponse = HttpResponse(body: response.data, statusCode: response.statusCode!);
     } on DioError catch (e) {
       httpResponse = HttpResponse(body: e.response?.data ?? {}, statusCode: e.response?.statusCode ?? -1, message: e.message);
