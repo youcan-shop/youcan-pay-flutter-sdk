@@ -42,8 +42,8 @@ class YCPResponseFactory {
 
         return ycPayResponse;
       }
-    } catch (e) {
-      throw InvalidDecodedJSONException(e.toString());
+    } catch (exception) {
+      throw InvalidDecodedJSONException(exception.toString());
     }
 
     throw InvalidResponseException("Error occurred while decoding data");

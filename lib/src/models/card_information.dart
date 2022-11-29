@@ -16,13 +16,4 @@ class CardInformation {
   }) {
     CardInformationValidator.isValid(this);
   }
-
-  Map<String, String> toMap() {
-    return {
-      'card_holder_name': cardHolderName,
-      'credit_card': cardNumber,
-      'expire_date': "$expireDateMonth/$expireDateYear",
-      'cvv': cvv,
-    };
-  }
 }
