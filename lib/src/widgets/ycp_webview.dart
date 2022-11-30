@@ -4,11 +4,11 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../models/ycp_response_3ds.dart';
 
 class YCPWebView extends StatefulWidget {
-  Function(String? transactionId) onSuccessfulPayment;
-  Function(String? message) onFailedPayment;
-  YCPResponse3ds response;
+  final Function(String? transactionId) onSuccessfulPayment;
+  final Function(String? message) onFailedPayment;
+  final YCPResponse3ds response;
 
-  YCPWebView({Key? key, required this.response, required this.onSuccessfulPayment, required this.onFailedPayment}) : super(key: key);
+  const YCPWebView({Key? key, required this.response, required this.onSuccessfulPayment, required this.onFailedPayment}) : super(key: key);
 
   @override
   State<YCPWebView> createState() => _YCPWebViewState();
@@ -23,14 +23,32 @@ class _YCPWebViewState extends State<YCPWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return WebView(
-        initialUrl: response.redirectUrl,
-        javascriptMode: JavascriptMode.unrestricted,
-        gestureNavigationEnabled: true,
-        onPageStarted: (url){
-          urlListener(url);
-        },
-       );
+    return Stack(
+      children: [
+        WebView(
+          initialUrl: response.redirectUrl,
+          javascriptMode: JavascriptMode.unrestricted,
+          gestureNavigationEnabled: true,
+          onPageStarted: (url) {
+            urlListener(url);
+          },
+        ),
+        Positioned(
+          left: 10,
+          top: 10,
+          child: IconButton(
+              onPressed: () {
+                onFailedPayment("payment_canceled");
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.close,
+                color: Colors.black,
+                size: 28,
+              )),
+        ),
+      ],
+    );
   }
 
   void urlListener(String url) {

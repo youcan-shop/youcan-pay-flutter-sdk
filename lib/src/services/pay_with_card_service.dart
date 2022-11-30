@@ -60,6 +60,8 @@ class PayWithCardService extends BasedService {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
       builder: (context) {
         return SizedBox(
             height: MediaQuery.of(context).size.height * 0.9,
