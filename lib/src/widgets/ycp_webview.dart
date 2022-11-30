@@ -23,29 +23,35 @@ class _YCPWebViewState extends State<YCPWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        WebView(
-          initialUrl: response.redirectUrl,
-          javascriptMode: JavascriptMode.unrestricted,
-          gestureNavigationEnabled: true,
-          onPageStarted: (url) {
-            urlListener(url);
-          },
+        Container(
+          width: Size.infinite.width,
+          color: Colors.white,
+          child: Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    onFailedPayment("payment_canceled");
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    color: Colors.black,
+                    size: 28,
+                  )),
+            ],
+          ),
         ),
-        Positioned(
-          left: 10,
-          top: 10,
-          child: IconButton(
-              onPressed: () {
-                onFailedPayment("payment_canceled");
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.close,
-                color: Colors.black,
-                size: 28,
-              )),
+        Expanded(
+          child: WebView(
+            initialUrl: response.redirectUrl,
+            javascriptMode: JavascriptMode.unrestricted,
+            gestureNavigationEnabled: true,
+            onPageStarted: (url) {
+              urlListener(url);
+            },
+          ),
         ),
       ],
     );
