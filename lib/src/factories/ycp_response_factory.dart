@@ -15,7 +15,7 @@ class YCPResponseFactory {
         transactionId:  "",
         success: false,
         code: "-1",
-        message: response.message // "Network Error"
+        message: response.message
       );
 
       return ycPayResponse;
