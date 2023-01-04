@@ -70,6 +70,7 @@ class _YCPWebViewState extends State<YCPWebView> {
 
         onFailedPayment(urlData["message"]);
         Navigator.pop(context);
+
         return;
       }
 
