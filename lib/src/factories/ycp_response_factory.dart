@@ -10,16 +10,26 @@ import '../models/ycpay_response.dart';
 class YCPResponseFactory {
   static YCPayResponse fromJSON(HttpResponse response) {
     late YCPayResponse ycPayResponse;
+    if(response.statusCode == -1){
+      ycPayResponse = YCPResponseSale(
+        transactionId:  "",
+        success: false,
+        code: "-1",
+        message: response.message
+      );
+
+      return ycPayResponse;
+    }
 
     try {
       Map<String, dynamic> jsonObject = response.body;
 
       if (jsonObject.containsKey("success")) {
         ycPayResponse = YCPResponseSale(
-          transactionId: jsonObject["transaction_id"],
-          success: jsonObject["success"],
-          code: jsonObject["code"],
-          message: jsonObject["message"],
+          transactionId: jsonObject["transaction_id"] ?? "",
+          success: jsonObject["success"] ?? false,
+          code: jsonObject["code"] ?? "",
+          message: jsonObject["message"] ?? "",
         );
 
         return ycPayResponse;
@@ -27,8 +37,8 @@ class YCPResponseFactory {
 
       if (jsonObject.containsKey("redirect_url") && jsonObject.containsKey("return_url")) {
         ycPayResponse = YCPResponse3ds(
-          returnUrl: jsonObject["return_url"],
-          redirectUrl: jsonObject["redirect_url"],
+          returnUrl: jsonObject["return_url"] ?? "",
+          redirectUrl: jsonObject["redirect_url"] ?? "",
         );
 
         return ycPayResponse;
@@ -37,7 +47,7 @@ class YCPResponseFactory {
       if (jsonObject.containsKey("token")) {
         ycPayResponse = YCPResponseCashPlus(
           transactionId: jsonObject["transaction_id"] ?? "",
-          token: jsonObject["token"],
+          token: jsonObject["token"] ?? "",
         );
 
         return ycPayResponse;
