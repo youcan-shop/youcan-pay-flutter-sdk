@@ -28,4 +28,4 @@ migrate_working_dir/
 .dart_tool/
 .packages
 build/
-/lib/src/test.dart
+/lib/src/yc_pay.dart
