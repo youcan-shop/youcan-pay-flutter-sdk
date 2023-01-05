@@ -1,3 +1,5 @@
+import 'package:youcanpay_sdk/src/localization/ycpay_strings.dart';
+
 import '../exceptions/invalid_card_information_exception.dart';
 import '../models/card_information.dart';
 
@@ -40,19 +42,19 @@ class CardInformationValidator {
 
   static void isValid(CardInformation cardInformation) {
     if (cardInformation.cardHolderName.isEmpty) {
-      throw InvalidCardInformationException("Card number is empty");
+      throw InvalidCardInformationException(YCPayStrings.get("card_number_is_empty"));
     }
 
     if (!isCardNumberValid(cardInformation.cardNumber)) {
-      throw InvalidCardInformationException("Card number is not valid");
+      throw InvalidCardInformationException(YCPayStrings.get("card_number_is_not_valid"));
     }
 
     if (!isCardExpiryValid(year: cardInformation.expireDateYear, month: cardInformation.expireDateMonth)) {
-      throw InvalidCardInformationException("Card expiry date is not valid");
+      throw InvalidCardInformationException(YCPayStrings.get("card_expiry_date_is_not_valid"));
     }
 
     if (!isCardCvvValid(cardInformation.cvv)) {
-      throw InvalidCardInformationException("Card cvv is not valid");
+      throw InvalidCardInformationException(YCPayStrings.get("card_cvv_is_not_valid"));
     }
   }
 }

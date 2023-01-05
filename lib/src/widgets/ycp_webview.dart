@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:youcanpay_sdk/src/localization/ycpay_strings.dart';
 
 import '../exceptions/invalid_response_exception.dart';
 import '../models/ycp_response_3ds.dart';
@@ -38,7 +39,7 @@ class _YCPWebViewState extends State<YCPWebView> {
             children: [
               IconButton(
                   onPressed: () {
-                    onFailedPayment("payment_canceled");
+                    onFailedPayment(YCPayStrings.get("payment_canceled"));
                     Navigator.pop(context);
                   },
                   icon: const Icon(
@@ -81,7 +82,7 @@ class _YCPWebViewState extends State<YCPWebView> {
         Navigator.pop(context);
       }
     } catch (exception) {
-      onFailedPayment("payment_failed");
+      onFailedPayment(YCPayStrings.get("payment_failed"));
       Navigator.pop(context);
     }
   }
@@ -90,7 +91,7 @@ class _YCPWebViewState extends State<YCPWebView> {
     List<String> urlSplit = url.split("?");
 
     if (urlSplit.length == 1) {
-      throw InvalidResponseException("Invalid response");
+      throw InvalidResponseException(YCPayStrings.get("payment_failed"));
     }
 
     List<String> data = urlSplit[1].split("&");
