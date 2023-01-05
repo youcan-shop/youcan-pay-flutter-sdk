@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../exceptions/invalid_response_exception.dart';
 import '../models/ycp_response_3ds.dart';
 
 class YCPWebView extends StatefulWidget {
@@ -8,7 +9,12 @@ class YCPWebView extends StatefulWidget {
   final Function(String? message) onFailedPayment;
   final YCPResponse3ds response;
 
-  const YCPWebView({Key? key, required this.response, required this.onSuccessfulPayment, required this.onFailedPayment}) : super(key: key);
+  const YCPWebView(
+      {Key? key,
+      required this.response,
+      required this.onSuccessfulPayment,
+      required this.onFailedPayment})
+      : super(key: key);
 
   @override
   State<YCPWebView> createState() => _YCPWebViewState();
@@ -64,6 +70,7 @@ class _YCPWebViewState extends State<YCPWebView> {
 
         onFailedPayment(urlData["message"]);
         Navigator.pop(context);
+
         return;
       }
 
@@ -74,7 +81,7 @@ class _YCPWebViewState extends State<YCPWebView> {
         Navigator.pop(context);
       }
     } catch (exception) {
-      onFailedPayment("unexpected_error_occurred");
+      onFailedPayment("payment_failed");
       Navigator.pop(context);
     }
   }
@@ -83,7 +90,7 @@ class _YCPWebViewState extends State<YCPWebView> {
     List<String> urlSplit = url.split("?");
 
     if (urlSplit.length == 1) {
-      return {};
+      throw InvalidResponseException("Invalid response");
     }
 
     List<String> data = urlSplit[1].split("&");
