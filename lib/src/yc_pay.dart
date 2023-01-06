@@ -33,7 +33,7 @@ class YCPay {
     required Function(String? transactionId) onSuccessfulPayment,
     required Function(String? message) onFailedPayment
   }) async {
-    await payWithCardService.payWithCard(
+    payWithCardService.payWithCard(
         token: token,
         pubKey: publicKey,
         cardInformation: cardInformation,
