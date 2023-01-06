@@ -10,7 +10,6 @@ class YCPay {
   String publicKey;
   BuildContext context;
   String locale;
-
   late PayWithCardService payWithCardService;
   PayWithCashPlusService payWithCashPlusService = PayWithCashPlusService();
   AccountConfigService accountConfigService = AccountConfigService();
