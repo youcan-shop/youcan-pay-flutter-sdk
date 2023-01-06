@@ -9,13 +9,10 @@ import '../factories/ycp_response_factory.dart';
 import '../models/http_response.dart';
 
 class PayWithCashPlusService extends BasedService {
-  BuildContext context;
-  PayWithCashPlusService({required this.context});
-
   void payWithCashPlus({
     required String token,
     required String pubKey,
-    required Function(String? transactionId,String? token) onSuccessfulPayment,
+    required Function(String? transactionId, String? token) onSuccessfulPayment,
     required Function(String? message) onFailedPayment
   }) async {
     Map<String, String> params = {};
@@ -24,17 +21,17 @@ class PayWithCashPlusService extends BasedService {
     params['pub_key'] = pubKey;
     params['is_mobile'] = "1";
 
-    try{
+    try {
       HttpResponse response = await httpAdapter.post(url: Constants.PAY_WITH_CASHPLUS_URL, body: params);
       YCPayResponse ycPayResponse = YCPResponseFactory.fromJSON(response);
 
-      if(ycPayResponse is YCPResponseSale){
-        onFailedPayment(ycPayResponse.message);
+      if (ycPayResponse is YCPResponseCashPlus) {
+        onSuccessfulPayment(ycPayResponse.transactionId, ycPayResponse.token);
 
         return;
       }
 
-      onSuccessfulPayment((ycPayResponse as YCPResponseCashPlus).transactionId,ycPayResponse.token);
+      onFailedPayment((ycPayResponse as YCPResponseSale).message);
     } catch (e) {
       onFailedPayment(e.toString());
     }
