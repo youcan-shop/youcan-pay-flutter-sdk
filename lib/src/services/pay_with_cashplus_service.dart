@@ -13,6 +13,7 @@ class PayWithCashPlusService extends BasedService {
       required Function(String? transactionId, String? token) onSuccessfulPayment,
       required Function(String? message) onFailedPayment
   }) async {
+
     Map<String, String> params = {};
 
     params['token_id'] = token;
