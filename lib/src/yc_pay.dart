@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-
 import 'localization/ycpay_locale.dart';
 import 'models/account_config.dart';
 import 'models/card_information.dart';
 import 'services/account_config_service.dart';
 import 'services/pay_with_card_service.dart';
+import 'services/pay_with_cashplus_service.dart';
 
 class YCPay {
   String publicKey;
@@ -12,7 +12,8 @@ class YCPay {
   String locale;
 
   late PayWithCardService payWithCardService;
-  late AccountConfigService accountConfigService = AccountConfigService();
+  PayWithCashPlusService payWithCashPlusService = PayWithCashPlusService();
+  AccountConfigService accountConfigService = AccountConfigService();
 
   YCPay({
     required this.publicKey,
@@ -37,6 +38,19 @@ class YCPay {
         token: token,
         pubKey: publicKey,
         cardInformation: cardInformation,
+        onSuccessfulPayment: onSuccessfulPayment,
+        onFailedPayment: onFailedPayment
+    );
+  }
+
+  void payWithCashPlus({
+        required String token,
+        required Function(String? transactionId, String? token) onSuccessfulPayment,
+        required Function(String? message) onFailedPayment
+  }) async {
+    payWithCashPlusService.payWithCashPlus(
+        token: token,
+        pubKey: publicKey,
         onSuccessfulPayment: onSuccessfulPayment,
         onFailedPayment: onFailedPayment
     );
