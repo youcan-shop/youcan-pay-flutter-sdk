@@ -19,6 +19,7 @@ class PayWithCashPlusService extends BasedService {
     required Function(String? message) onFailedPayment
   }) async {
     Map<String, String> params = {};
+
     params['token_id'] = token;
     params['pub_key'] = pubKey;
     params['is_mobile'] = "1";
