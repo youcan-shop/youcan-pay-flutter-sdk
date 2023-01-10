@@ -22,7 +22,7 @@ class YCPay {
   }) {
     _publicKey = publicKey;
     _context = context;
-    YCPayLocale.locale = locale;
+    YCPayLocale.setLocale(locale);
     SandboxController.setSandbox(sandbox);
 
     _payWithCardService = PayWithCardService(context: _context);
