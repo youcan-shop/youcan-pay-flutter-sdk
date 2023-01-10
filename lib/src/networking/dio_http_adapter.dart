@@ -1,9 +1,9 @@
 import 'package:youcanpay_sdk/src/localization/ycpay_locale.dart';
 import 'package:youcanpay_sdk/src/models/http_response.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:dio/dio.dart';
 
 import '../configs/constants.dart';
+import '../controllers/sandbox_controller.dart';
 import 'http_adapter.dart';
 
 class DioHttpAdapter extends HttpAdapter {
@@ -11,8 +11,8 @@ class DioHttpAdapter extends HttpAdapter {
   final Map<String, dynamic> _header = {"Content-Type": "application/json", "Accept": "application/json", "X-Preferred-Locale": YCPayLocale.locale};
 
   DioHttpAdapter() {
-    _dio = Dio(BaseOptions(baseUrl: Constants.BASE_URL, headers: _header));
-    _dio.interceptors.add(PrettyDioLogger(requestBody: true,requestHeader: true));
+    String basedUrl = SandboxController.isSandbox ? Constants.SANDBOX_BASE_URL : Constants.BASE_URL;
+    _dio = Dio(BaseOptions(baseUrl: basedUrl, headers: _header));
   }
 
   @override
