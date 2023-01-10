@@ -17,7 +17,7 @@ class YCPay {
   YCPay({
     required String publicKey,
     required BuildContext context,
-    required bool sandbox,
+    bool sandbox = false,
     String locale = YCPayLocale.defaultLocale
   }) {
     _publicKey = publicKey;
