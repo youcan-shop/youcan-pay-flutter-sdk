@@ -3,28 +3,35 @@ import 'localization/ycpay_locale.dart';
 import 'models/account_config.dart';
 import 'models/card_information.dart';
 import 'services/account_config_service.dart';
+import 'controllers/sandbox_controller.dart';
 import 'services/pay_with_card_service.dart';
 import 'services/pay_with_cashplus_service.dart';
 
 class YCPay {
-  String publicKey;
-  BuildContext context;
-  String locale;
-  late PayWithCardService payWithCardService;
-  PayWithCashPlusService payWithCashPlusService = PayWithCashPlusService();
-  AccountConfigService accountConfigService = AccountConfigService();
+  late final String _publicKey;
+  late final BuildContext _context;
+  late PayWithCardService _payWithCardService;
+  late PayWithCashPlusService _payWithCashPlusService;
+  late AccountConfigService _accountConfigService;
 
   YCPay({
-    required this.publicKey,
-    required this.context,
-    this.locale = YCPayLocale.defaultLocale
+    required String publicKey,
+    required BuildContext context,
+    required bool sandbox,
+    String locale = YCPayLocale.defaultLocale
   }) {
+    _publicKey = publicKey;
+    _context = context;
     YCPayLocale.locale = locale;
-    payWithCardService = PayWithCardService(context: context);
+    SandboxController.setSandbox(sandbox);
+
+    _payWithCardService = PayWithCardService(context: _context);
+    _payWithCashPlusService = PayWithCashPlusService();
+    _accountConfigService = AccountConfigService();
   }
 
   Future<AccountConfig> getAccountConfig() async {
-    return await accountConfigService.getAccountConfig(pubKey: publicKey);
+    return await _accountConfigService.getAccountConfig(pubKey: _publicKey);
   }
 
   Future payWithCard({
@@ -33,9 +40,9 @@ class YCPay {
     required Function(String? transactionId) onSuccessfulPayment,
     required Function(String? message) onFailedPayment
   }) async {
-    payWithCardService.payWithCard(
+    _payWithCardService.payWithCard(
         token: token,
-        pubKey: publicKey,
+        pubKey: _publicKey,
         cardInformation: cardInformation,
         onSuccessfulPayment: onSuccessfulPayment,
         onFailedPayment: onFailedPayment
@@ -43,13 +50,13 @@ class YCPay {
   }
 
   void payWithCashPlus({
-        required String token,
-        required Function(String? transactionId, String? token) onSuccessfulPayment,
-        required Function(String? message) onFailedPayment
+    required String token,
+    required Function(String? transactionId, String? cashPlusToken) onSuccessfulPayment,
+    required Function(String? message) onFailedPayment
   }) async {
-    payWithCashPlusService.payWithCashPlus(
+    _payWithCashPlusService.payWithCashPlus(
         token: token,
-        pubKey: publicKey,
+        pubKey: _publicKey,
         onSuccessfulPayment: onSuccessfulPayment,
         onFailedPayment: onFailedPayment
     );
