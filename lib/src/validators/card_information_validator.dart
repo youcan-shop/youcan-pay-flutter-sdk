@@ -21,7 +21,8 @@ class CardInformationValidator {
     int currentYear = now.year;
     int currentMonth = now.month;
 
-    if (RegExp(_cardExpiryRegex).hasMatch(year) && RegExp(_cardExpiryRegex).hasMatch(month)) {
+    if (RegExp(_cardExpiryRegex).hasMatch(year) &&
+        RegExp(_cardExpiryRegex).hasMatch(month)) {
       DateTime expiryDate = DateTime.parse("20$year-$month-01");
 
       int expiryYear = expiryDate.year;
@@ -41,19 +42,25 @@ class CardInformationValidator {
 
   static void isValid(CardInformation cardInformation) {
     if (cardInformation.cardHolderName.isEmpty) {
-      throw InvalidCardInformationException(YCPayStrings.get("card_number_is_empty"));
+      throw InvalidCardInformationException(
+          YCPayStrings.get("card_number_is_empty"));
     }
 
     if (!isCardNumberValid(cardInformation.cardNumber)) {
-      throw InvalidCardInformationException(YCPayStrings.get("card_number_is_not_valid"));
+      throw InvalidCardInformationException(
+          YCPayStrings.get("card_number_is_not_valid"));
     }
 
-    if (!isCardExpiryValid(year: cardInformation.expireDateYear, month: cardInformation.expireDateMonth)) {
-      throw InvalidCardInformationException(YCPayStrings.get("card_expiry_date_is_not_valid"));
+    if (!isCardExpiryValid(
+        year: cardInformation.expireDateYear,
+        month: cardInformation.expireDateMonth)) {
+      throw InvalidCardInformationException(
+          YCPayStrings.get("card_expiry_date_is_not_valid"));
     }
 
     if (!isCardCvvValid(cardInformation.cvv)) {
-      throw InvalidCardInformationException(YCPayStrings.get("card_cvv_is_not_valid"));
+      throw InvalidCardInformationException(
+          YCPayStrings.get("card_cvv_is_not_valid"));
     }
   }
 }

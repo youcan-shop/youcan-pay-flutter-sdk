@@ -7,13 +7,12 @@ import '../factories/ycp_response_factory.dart';
 import '../models/http_response.dart';
 
 class PayWithCashPlusService extends BasedService {
-  void payWithCashPlus({
-      required String token,
+  void payWithCashPlus(
+      {required String token,
       required String pubKey,
-      required Function(String? transactionId, String? token) onSuccessfulPayment,
-      required Function(String? message) onFailedPayment
-  }) async {
-
+      required Function(String? transactionId, String? token)
+          onSuccessfulPayment,
+      required Function(String? message) onFailedPayment}) async {
     Map<String, String> params = {};
 
     params['token_id'] = token;
@@ -22,7 +21,7 @@ class PayWithCashPlusService extends BasedService {
 
     try {
       HttpResponse response = await httpAdapter.post(
-          url: Constants.PAY_WITH_CASHPLUS_URL, body: params);
+          url: Constants.payWithCashPlusUrl, body: params);
       YCPayResponse ycPayResponse = YCPResponseFactory.fromJSON(response);
 
       if (ycPayResponse is YCPResponseCashPlus) {

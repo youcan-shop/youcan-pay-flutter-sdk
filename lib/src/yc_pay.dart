@@ -14,12 +14,11 @@ class YCPay {
   late PayWithCashPlusService _payWithCashPlusService;
   late AccountConfigService _accountConfigService;
 
-  YCPay({
-    required String publicKey,
-    required BuildContext context,
-    bool sandbox = false,
-    String locale = YCPayLocale.defaultLocale
-  }) {
+  YCPay(
+      {required String publicKey,
+      required BuildContext context,
+      bool sandbox = false,
+      String locale = YCPayLocale.defaultLocale}) {
     _publicKey = publicKey;
     _context = context;
     YCPayLocale.setLocale(locale);
@@ -34,31 +33,28 @@ class YCPay {
     return await _accountConfigService.getAccountConfig(pubKey: _publicKey);
   }
 
-  Future payWithCard({
-    required String token,
-    required CardInformation cardInformation,
-    required Function(String? transactionId) onSuccessfulPayment,
-    required Function(String? message) onFailedPayment
-  }) async {
+  Future payWithCard(
+      {required String token,
+      required CardInformation cardInformation,
+      required Function(String? transactionId) onSuccessfulPayment,
+      required Function(String? message) onFailedPayment}) async {
     _payWithCardService.payWithCard(
         token: token,
         pubKey: _publicKey,
         cardInformation: cardInformation,
         onSuccessfulPayment: onSuccessfulPayment,
-        onFailedPayment: onFailedPayment
-    );
+        onFailedPayment: onFailedPayment);
   }
 
-  void payWithCashPlus({
-    required String token,
-    required Function(String? transactionId, String? cashPlusToken) onSuccessfulPayment,
-    required Function(String? message) onFailedPayment
-  }) async {
+  void payWithCashPlus(
+      {required String token,
+      required Function(String? transactionId, String? cashPlusToken)
+          onSuccessfulPayment,
+      required Function(String? message) onFailedPayment}) async {
     _payWithCashPlusService.payWithCashPlus(
         token: token,
         pubKey: _publicKey,
         onSuccessfulPayment: onSuccessfulPayment,
-        onFailedPayment: onFailedPayment
-    );
+        onFailedPayment: onFailedPayment);
   }
 }

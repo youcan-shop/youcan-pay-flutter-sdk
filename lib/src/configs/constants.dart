@@ -1,7 +1,7 @@
 class Constants {
-  static const String BASE_URL = "https://youcanpay.com/";
-  static const String SANDBOX_BASE_URL = "${BASE_URL}sandbox/";
-  static const String CONFIG_URL = "get-account-configs/";
-  static const String PAY_WITH_CARD_URL ="api/pay/";
-  static const String PAY_WITH_CASHPLUS_URL ="api/cashplus/init/";
+  static const String baseUrl = "https://youcanpay.com/";
+  static const String sandboxBasedUrl = "${baseUrl}sandbox/";
+  static const String configUrl = "get-account-configs/";
+  static const String payWithCardUrl = "api/pay/";
+  static const String payWithCashPlusUrl = "api/cashplus/init/";
 }

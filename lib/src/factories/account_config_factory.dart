@@ -10,14 +10,18 @@ class AccountConfigFactory {
     try {
       Map<String, dynamic> jsonObject = response.body;
 
-      if (jsonObject.containsKey("acceptsCreditCards") && jsonObject.containsKey("acceptsCashPlus") && jsonObject.containsKey("cashPlusTransactionEnabled") && jsonObject.containsKey("account")) {
+      if (jsonObject.containsKey("acceptsCreditCards") &&
+          jsonObject.containsKey("acceptsCashPlus") &&
+          jsonObject.containsKey("cashPlusTransactionEnabled") &&
+          jsonObject.containsKey("account")) {
         accountConfig = AccountConfig(
           success: true,
           acceptsCreditCards: jsonObject["acceptsCreditCards"],
           acceptsCashPlus: jsonObject["acceptsCashPlus"],
           cashPlusTransactionEnabled: jsonObject["cashPlusTransactionEnabled"],
           acceptsYouCanPayWallet: jsonObject["acceptsYouCanPayWallet"] ?? false,
-          walletTransactionEnabled: jsonObject["walletTransactionEnabled"] ?? false,
+          walletTransactionEnabled:
+              jsonObject["walletTransactionEnabled"] ?? false,
           helpCenterEnabled: jsonObject["helpCenterEnabled"] ?? false,
           paymentsActive: (jsonObject["account"] as Map)["payments_active"],
         );

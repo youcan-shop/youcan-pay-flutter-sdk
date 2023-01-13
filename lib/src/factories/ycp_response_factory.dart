@@ -9,13 +9,12 @@ import '../models/ycpay_response.dart';
 class YCPResponseFactory {
   static YCPayResponse fromJSON(HttpResponse response) {
     late YCPayResponse ycPayResponse;
-    if(response.statusCode == -1){
+    if (response.statusCode == -1) {
       ycPayResponse = YCPResponseSale(
-        transactionId:  "",
-        success: false,
-        code: "-1",
-        message: response.message
-      );
+          transactionId: "",
+          success: false,
+          code: "-1",
+          message: response.message);
 
       return ycPayResponse;
     }
@@ -34,7 +33,8 @@ class YCPResponseFactory {
         return ycPayResponse;
       }
 
-      if (jsonObject.containsKey("redirect_url") && jsonObject.containsKey("return_url")) {
+      if (jsonObject.containsKey("redirect_url") &&
+          jsonObject.containsKey("return_url")) {
         ycPayResponse = YCPResponse3ds(
           returnUrl: jsonObject["return_url"] ?? "",
           redirectUrl: jsonObject["redirect_url"] ?? "",
