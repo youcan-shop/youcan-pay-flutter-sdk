@@ -5,7 +5,8 @@ class CardInformationFactory {
     return {
       'card_holder_name': cardInformation.cardHolderName,
       'credit_card': cardInformation.cardNumber,
-      'expire_date': "${cardInformation.expireDateMonth}/${cardInformation.expireDateYear}",
+      'expire_date':
+          "${cardInformation.expireDateMonth}/${cardInformation.expireDateYear}",
       'cvv': cardInformation.cvv,
     };
   }

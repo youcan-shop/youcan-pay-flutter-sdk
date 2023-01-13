@@ -15,20 +15,20 @@ class PayWithCardService extends BasedService {
   BuildContext context;
   PayWithCardService({required this.context});
 
-  void payWithCard({
-    required String token,
-    required String pubKey,
-    required CardInformation cardInformation,
-    required Function(String? transactionId) onSuccessfulPayment,
-    required Function(String? message) onFailedPayment
-  }) async {
+  void payWithCard(
+      {required String token,
+      required String pubKey,
+      required CardInformation cardInformation,
+      required Function(String? transactionId) onSuccessfulPayment,
+      required Function(String? message) onFailedPayment}) async {
     Map<String, String> params = CardInformationFactory.toMap(cardInformation);
     params['token_id'] = token;
     params['pub_key'] = pubKey;
     params['is_mobile'] = "1";
 
-    try{
-      HttpResponse response = await httpAdapter.post(url: Constants.PAY_WITH_CARD_URL, body: params);
+    try {
+      HttpResponse response =
+          await httpAdapter.post(url: Constants.payWithCardUrl, body: params);
       YCPayResponse ycPayResponse = YCPResponseFactory.fromJSON(response);
 
       if (ycPayResponse is YCPResponseSale) {
@@ -43,7 +43,10 @@ class PayWithCardService extends BasedService {
       }
 
       if (ycPayResponse is YCPResponse3ds) {
-        on3dsPayment(onFailedPayment: onFailedPayment, onSuccessfulPayment: onSuccessfulPayment, response: ycPayResponse);
+        on3dsPayment(
+            onFailedPayment: onFailedPayment,
+            onSuccessfulPayment: onSuccessfulPayment,
+            response: ycPayResponse);
 
         return;
       }
@@ -52,11 +55,10 @@ class PayWithCardService extends BasedService {
     }
   }
 
-  void on3dsPayment({
-    required YCPResponse3ds response,
-    required Function(String? transactionId) onSuccessfulPayment,
-    required Function(String? message) onFailedPayment
-  }) async {
+  void on3dsPayment(
+      {required YCPResponse3ds response,
+      required Function(String? transactionId) onSuccessfulPayment,
+      required Function(String? message) onFailedPayment}) async {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -69,7 +71,7 @@ class PayWithCardService extends BasedService {
               onFailedPayment: (message) {
                 onFailedPayment(message);
               },
-              onSuccessfulPayment:(transactionId) {
+              onSuccessfulPayment: (transactionId) {
                 onSuccessfulPayment(transactionId);
               },
               response: response,

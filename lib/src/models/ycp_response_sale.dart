@@ -5,7 +5,11 @@ class YCPResponseSale extends YCPayResponse {
   String message;
   String code;
 
-  YCPResponseSale({required super.transactionId, required this.success, required this.message, required this.code});
+  YCPResponseSale(
+      {required super.transactionId,
+      required this.success,
+      required this.message,
+      required this.code});
 
   @override
   String toString() {

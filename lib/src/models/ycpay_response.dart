@@ -1,7 +1,7 @@
 class YCPayResponse {
   String transactionId = "";
 
-  YCPayResponse({ this.transactionId = ""});
+  YCPayResponse({this.transactionId = ""});
 
   @override
   String toString() {
