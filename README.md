@@ -19,7 +19,7 @@ dependencies:
 
 Or run following command line
 ```sh
-flutter pub add youcanpay
+flutter pub add youcanpay_sdk
 ```
 #### Import it
 Now in your Dart code, you can use:
