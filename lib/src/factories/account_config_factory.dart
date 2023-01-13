@@ -1,6 +1,5 @@
-import 'package:youcanpay_sdk/src/exceptions/invalid_decoded_json_exception.dart';
-import 'package:youcanpay_sdk/src/exceptions/invalid_response_exception.dart';
-
+import '../exceptions/invalid_decoded_json_exception.dart';
+import '../exceptions/invalid_response_exception.dart';
 import '../models/account_config.dart';
 import '../models/http_response.dart';
 

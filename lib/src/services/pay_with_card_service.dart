@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:youcanpay_sdk/src/configs/constants.dart';
-import 'package:youcanpay_sdk/src/models/card_information.dart';
-import 'package:youcanpay_sdk/src/models/ycp_response_sale.dart';
-import 'package:youcanpay_sdk/src/models/ycpay_response.dart';
-import 'package:youcanpay_sdk/src/services/based_service.dart';
 
+import '../../youcanpay_sdk.dart';
+import '../configs/constants.dart';
 import '../factories/card_information_factory.dart';
 import '../factories/ycp_response_factory.dart';
 import '../models/http_response.dart';
 import '../models/ycp_response_3ds.dart';
+import '../models/ycp_response_sale.dart';
+import '../models/ycpay_response.dart';
 import '../widgets/ycp_webview.dart';
+import 'based_service.dart';
 
 class PayWithCardService extends BasedService {
   BuildContext context;

@@ -1,6 +1,5 @@
-import 'package:youcanpay_sdk/src/localization/ycpay_strings.dart';
-
 import '../exceptions/invalid_card_information_exception.dart';
+import '../localization/ycpay_strings.dart';
 import '../models/card_information.dart';
 
 class CardInformationValidator {

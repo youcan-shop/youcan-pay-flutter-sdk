@@ -1,4 +1,4 @@
-import 'package:youcanpay_sdk/src/models/ycpay_response.dart';
+import 'ycpay_response.dart';
 
 class YCPResponseSale extends YCPayResponse {
   bool success;

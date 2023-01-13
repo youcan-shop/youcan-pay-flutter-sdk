@@ -1,4 +1,4 @@
-import 'package:youcanpay_sdk/src/models/card_information.dart';
+import '../models/card_information.dart';
 
 class CardInformationFactory {
   static Map<String, String> toMap(CardInformation cardInformation) {

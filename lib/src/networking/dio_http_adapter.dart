@@ -1,7 +1,6 @@
-import 'package:youcanpay_sdk/src/localization/ycpay_locale.dart';
-import 'package:youcanpay_sdk/src/models/http_response.dart';
+import '../localization/ycpay_locale.dart';
+import '../models/http_response.dart';
 import 'package:dio/dio.dart';
-
 import '../configs/constants.dart';
 import '../controllers/sandbox_controller.dart';
 import 'http_adapter.dart';

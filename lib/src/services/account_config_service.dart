@@ -1,7 +1,6 @@
-import 'package:youcanpay_sdk/src/configs/constants.dart';
-import 'package:youcanpay_sdk/src/models/http_response.dart';
-import 'package:youcanpay_sdk/src/services/based_service.dart';
-
+import '../configs/constants.dart';
+import '../models/http_response.dart';
+import '../services/based_service.dart';
 import '../factories/account_config_factory.dart';
 import '../models/account_config.dart';
 

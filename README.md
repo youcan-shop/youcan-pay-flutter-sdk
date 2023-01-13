@@ -14,7 +14,7 @@ This integration requires endpoints on your server in order to communicate with 
 Add youcanpay to your pubspec.yaml file:
 ```yaml
 dependencies:
-  youcanpay: <version>
+  youcanpay_sdk: <version>
 ```
 
 Or run following command line

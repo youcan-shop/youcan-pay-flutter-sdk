@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:youcanpay_sdk/src/localization/ycpay_strings.dart';
-
 import '../exceptions/invalid_response_exception.dart';
+import '../localization/ycpay_strings.dart';
 import '../models/ycp_response_3ds.dart';
 
 class YCPWebView extends StatefulWidget {

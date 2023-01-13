@@ -1,6 +1,5 @@
-import 'package:youcanpay_sdk/src/models/ycp_response_3ds.dart';
-import 'package:youcanpay_sdk/src/models/ycp_response_sale.dart';
-
+import '../models/ycp_response_3ds.dart';
+import '../models/ycp_response_sale.dart';
 import '../exceptions/invalid_decoded_json_exception.dart';
 import '../exceptions/invalid_response_exception.dart';
 import '../models/http_response.dart';
