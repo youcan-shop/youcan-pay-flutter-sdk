@@ -29,40 +29,55 @@ class DioHttpAdapter implements HttpAdapter {
   }
 
   @override
-  Future<HttpResponse> get(
-      {required String url, Map<String, String> params = const {}}) async {
+  Future<HttpResponse> get({
+    required String url,
+    Map<String, String> params = const {},
+  }) async {
     Response response;
     HttpResponse httpResponse;
 
     try {
-      response = await _dio.get(url, queryParameters: params);
-      httpResponse =
-          HttpResponse(body: response.data, statusCode: response.statusCode!);
+      response = await _dio.get(
+        url,
+        queryParameters: params,
+      );
+      httpResponse = HttpResponse(
+        body: response.data,
+        statusCode: response.statusCode!,
+      );
     } on DioError catch (e) {
       httpResponse = HttpResponse(
-          body: e.response?.data ?? {},
-          statusCode: e.response?.statusCode ?? -1,
-          message: e.message);
+        body: e.response?.data ?? {},
+        statusCode: e.response?.statusCode ?? -1,
+        message: e.message,
+      );
     }
-
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse> post(
-      {required String url, Map<String, String> body = const {}}) async {
+  Future<HttpResponse> post({
+    required String url,
+    Map<String, String> body = const {},
+  }) async {
     Response response;
     HttpResponse httpResponse;
 
     try {
-      response = await _dio.post(url, data: body);
-      httpResponse =
-          HttpResponse(body: response.data, statusCode: response.statusCode!);
+      response = await _dio.post(
+        url,
+        data: body,
+      );
+      httpResponse = HttpResponse(
+        body: response.data,
+        statusCode: response.statusCode!,
+      );
     } on DioError catch (e) {
       httpResponse = HttpResponse(
-          body: e.response?.data ?? {},
-          statusCode: e.response?.statusCode ?? -1,
-          message: e.message);
+        body: e.response?.data ?? {},
+        statusCode: e.response?.statusCode ?? -1,
+        message: e.message,
+      );
     }
 
     return httpResponse;
