@@ -8,7 +8,7 @@ import '../models/http_response.dart';
 /// Factory class for handling external [AccountConfig] objects from the response of the server.
 class AccountConfigFactory {
   /// Decodes the response from the server and returns an [AccountConfig] object
-  static AccountConfig fromJSON(HttpResponse response) {
+  static AccountConfig fromResponse(HttpResponse response) {
     try {
       final Map<String, dynamic> jsonObject = response.body;
 
