@@ -1,13 +1,9 @@
 import '../models/card_information.dart';
 
+/// Factory class for handling external [CardInformation] objects from the response of the server.
 class CardInformationFactory {
+  /// Takes a [CardInformation] object and returns a [Map<String, String>] object.
   static Map<String, String> toMap(CardInformation cardInformation) {
-    return {
-      'card_holder_name': cardInformation.cardHolderName,
-      'credit_card': cardInformation.cardNumber,
-      'expire_date':
-          "${cardInformation.expireDateMonth}/${cardInformation.expireDateYear}",
-      'cvv': cardInformation.cvv,
-    };
+    return cardInformation.toMap();
   }
 }

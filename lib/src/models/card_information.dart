@@ -16,4 +16,20 @@ class CardInformation {
   }) {
     CardInformationValidator.isValid(this);
   }
+
+  Map<String, String> toMap() {
+    return {
+      'card_holder_name': cardHolderName,
+      'credit_card': cardNumber,
+      'expire_date': formattedExpireDate,
+      'cvv': cvv,
+    };
+  }
+
+  /// Returns the [expireDateMonth] and [expireDateYear] in the format MM/YY.
+  String get formattedExpireDate {
+    final String padLeftMonth = expireDateMonth.padLeft(2, "0");
+    final String padLeftYear = expireDateYear.padLeft(2, "0");
+    return "$padLeftMonth/$padLeftYear";
+  }
 }

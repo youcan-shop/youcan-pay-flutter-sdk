@@ -64,3 +64,26 @@ class CardInformationValidator {
     }
   }
 }
+
+extension ResponseMapValidationExtension on Map<String, dynamic> {
+  /// Checks if the map contains the keys required to create an [AccountConfig] object.
+  bool canBeParsedToAccountConfig() {
+    return containsKey("acceptsCreditCards") &&
+        containsKey("acceptsCashPlus") &&
+        containsKey("cashPlusTransactionEnabled") &&
+        containsKey("account");
+  }
+
+  /// Checks if the [Map<String, dynamic>] contains a message key.
+  bool containsMessage() {
+    return containsKey("message");
+  }
+
+  bool requires3dAuthentication() {
+    return containsKey("redirect_url") && containsKey("return_url");
+  }
+
+  bool tokenized() {
+    return containsKey("token");
+  }
+}
