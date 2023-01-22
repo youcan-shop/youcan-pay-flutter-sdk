@@ -14,14 +14,16 @@ class YCPay {
   late PayWithCashPlusService _payWithCashPlusService;
   late AccountConfigService _accountConfigService;
 
-  YCPay(
-      {required String publicKey,
-      required BuildContext context,
-      bool sandbox = false,
-      String locale = YCPayLocale.defaultLocale}) {
+  YCPay({
+    required String publicKey,
+    required BuildContext context,
+    bool sandbox = false,
+    YCPayLocale? locale,
+  }) {
     _publicKey = publicKey;
     _context = context;
-    YCPayLocale.setLocale(locale);
+
+    YCPayLocaleHandler.setLocale(locale ?? YCPayLocaleHandler.locale);
     SandboxController.setSandbox(sandbox);
 
     _payWithCardService = PayWithCardService(context: _context);

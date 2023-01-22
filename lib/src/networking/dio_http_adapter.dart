@@ -10,7 +10,7 @@ class DioHttpAdapter extends HttpAdapter {
   final Map<String, dynamic> _header = {
     "Content-Type": "application/json",
     "Accept": "application/json",
-    "X-Preferred-Locale": YCPayLocale.locale
+    "X-Preferred-Locale": YCPayLocaleHandler.locale.abbreviationName
   };
 
   DioHttpAdapter() {

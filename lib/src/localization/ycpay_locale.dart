@@ -1,14 +1,22 @@
-class YCPayLocale {
-  static const String defaultLocale = "en";
-  static String locale = defaultLocale;
-  static const List<String> supportedLanguage = ["en", "fr", "ar"];
+/// Represents the current locale of the app.
+enum YCPayLocale {
+  english,
+  french,
+  arabic,
+}
 
-  static void setLocale(String locale) {
-    if (supportedLanguage.contains(locale)) {
-      YCPayLocale.locale = locale;
+class YCPayLocaleHandler {
+  static YCPayLocale _defaultLocale = YCPayLocale.english;
 
-      return;
-    }
-    YCPayLocale.locale = defaultLocale;
+  /// Returns the current locale, defaults to [YCPayLocale.english].
+  static YCPayLocale get locale => _defaultLocale;
+
+  static void setLocale(YCPayLocale newLocale) {
+    _defaultLocale = newLocale;
   }
+}
+
+extension YCPayLocaleExtension on YCPayLocale {
+  String get abbreviationName =>
+      toString().split('.').last.substring(0, 2).toLowerCase();
 }
