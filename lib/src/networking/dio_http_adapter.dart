@@ -6,21 +6,20 @@ import '../controllers/sandbox_controller.dart';
 import 'http_adapter.dart';
 
 class DioHttpAdapter extends HttpAdapter {
-  /// The [Dio] instance.
+  // The internal [Dio] instance.
   late Dio _dio;
 
-  final Map<String, dynamic> _header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "X-Preferred-Locale": YCPayLocaleHandler.locale.abbreviationName
-  };
-
-  // This is a private constructor, so it can only be called from within the class.
+  // This is a private (encapsulated) constructor, so it can only be called from within the class.
   DioHttpAdapter._() {
     String basedUrl = SandboxController.isSandbox
         ? Constants.sandboxBasedUrl
         : Constants.baseUrl;
-    _dio = Dio(BaseOptions(baseUrl: basedUrl, headers: _header));
+    Map<String, dynamic> headers = Constants.headers;
+
+    _dio = Dio(BaseOptions(
+      baseUrl: basedUrl,
+      headers: headers,
+    ));
   }
 
   /// This is the factory constructor, it returns a singleton instance of [DioHttpAdapter] every time it is called.
