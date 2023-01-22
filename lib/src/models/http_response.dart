@@ -1,11 +1,18 @@
+import 'package:meta/meta.dart';
+
+@immutable
 class HttpResponse {
-  Map<String, dynamic> body;
-  int statusCode;
-  String message;
+  final Map<String, dynamic> body;
+  final int statusCode;
+  final String message;
 
-  HttpResponse(
-      {required this.statusCode, required this.body, this.message = ''});
+  const HttpResponse({
+    required this.statusCode,
+    required this.body,
+    this.message = '',
+  });
 
+  /// defines if the response is a success.
   bool get isSuccess {
     return statusCode >= 200 && statusCode < 300;
   }

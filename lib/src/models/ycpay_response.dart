@@ -1,7 +1,13 @@
-class YCPayResponse {
-  String transactionId = "";
+import 'package:flutter/cupertino.dart';
 
-  YCPayResponse({this.transactionId = ""});
+@immutable
+abstract class YCPayResponse {
+  final String transactionId;
+
+  /// Creates a new [YCPayResponse] object.
+  const YCPayResponse({
+    this.transactionId = "",
+  });
 
   @override
   String toString() {
