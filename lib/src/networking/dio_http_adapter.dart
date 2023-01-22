@@ -1,11 +1,10 @@
-import '../localization/ycpay_locale.dart';
 import '../models/http_response.dart';
 import 'package:dio/dio.dart';
 import '../configs/constants.dart';
 import '../controllers/sandbox_controller.dart';
 import 'http_adapter.dart';
 
-class DioHttpAdapter extends HttpAdapter {
+class DioHttpAdapter implements HttpAdapter {
   // The internal [Dio] instance.
   late Dio _dio;
 
@@ -16,16 +15,19 @@ class DioHttpAdapter extends HttpAdapter {
         : Constants.baseUrl;
     Map<String, dynamic> headers = Constants.headers;
 
-    _dio = Dio(BaseOptions(
-      baseUrl: basedUrl,
-      headers: headers,
-    ));
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: basedUrl,
+        headers: headers,
+      ),
+    );
   }
 
   /// This is the factory constructor, it returns a singleton instance of [DioHttpAdapter] every time it is called.
   factory DioHttpAdapter() {
     return DioHttpAdapter._();
   }
+
   @override
   Future<HttpResponse> get(
       {required String url, Map<String, String> params = const {}}) async {
