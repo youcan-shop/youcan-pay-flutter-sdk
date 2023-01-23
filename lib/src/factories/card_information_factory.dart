@@ -6,4 +6,5 @@ class CardInformationFactory {
   static Map<String, String> toMap(CardInformation cardInformation) {
     return cardInformation.toMap();
   }
+  
 }

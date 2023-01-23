@@ -86,4 +86,16 @@ extension ResponseMapValidationExtension on Map<String, dynamic> {
   bool tokenized() {
     return containsKey("token");
   }
+
+  void token(String token) {
+    this["token"] = token;
+  }
+
+  void pubKey(String pubKey) {
+    this["pub_key"] = pubKey;
+  }
+
+  void isMobile(String isMobile) {
+    this["is_mobile"] = isMobile;
+  }
 }

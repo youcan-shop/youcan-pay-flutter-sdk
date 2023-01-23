@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youcanpay_sdk/src/validators/card_information_validator.dart';
 
 import '../../youcanpay_sdk.dart';
 import '../configs/constants.dart';
@@ -12,41 +13,47 @@ import '../widgets/ycp_webview.dart';
 import 'based_service.dart';
 
 class PayWithCardService extends BasedService {
-  BuildContext context;
-  PayWithCardService({required this.context});
+  PayWithCardService();
 
-  void payWithCard(
-      {required String token,
-      required String pubKey,
-      required CardInformation cardInformation,
-      required Function(String? transactionId) onSuccessfulPayment,
-      required Function(String? message) onFailedPayment}) async {
-    Map<String, String> params = CardInformationFactory.toMap(cardInformation);
-    params['token_id'] = token;
-    params['pub_key'] = pubKey;
-    params['is_mobile'] = "1";
+  /// Executes the payment with a given [CardInformation] object.
+  void payWithCard({
+    required String token,
+    required String pubKey,
+    required CardInformation cardInformation,
+    required Function(String? transactionId) onSuccessfulPayment,
+    required Function(String? message) onFailedPayment,
+    required BuildContext context,
+  }) async {
+    final Map<String, String> params =
+        CardInformationFactory.toMap(cardInformation)
+          ..token(token)
+          ..pubKey(pubKey)
+          ..isMobile("1");
 
     try {
-      HttpResponse response =
-          await httpAdapter.post(url: Constants.payWithCardUrl, body: params);
+      HttpResponse response = await httpAdapter.post(
+        url: Constants.payWithCardUrl,
+        body: params,
+      );
       YCPayResponse ycPayResponse = YCPResponseFactory.fromJSON(response);
 
       if (ycPayResponse is YCPResponseSale) {
         if (ycPayResponse.success) {
           onSuccessfulPayment(ycPayResponse.transactionId);
-
-          return;
+        } else {
+          onFailedPayment(ycPayResponse.message);
         }
-        onFailedPayment(ycPayResponse.message);
 
         return;
       }
 
       if (ycPayResponse is YCPResponse3ds) {
         on3dsPayment(
-            onFailedPayment: onFailedPayment,
-            onSuccessfulPayment: onSuccessfulPayment,
-            response: ycPayResponse);
+          context: context,
+          onFailedPayment: onFailedPayment,
+          onSuccessfulPayment: onSuccessfulPayment,
+          response: ycPayResponse,
+        );
 
         return;
       }
@@ -55,27 +62,31 @@ class PayWithCardService extends BasedService {
     }
   }
 
-  void on3dsPayment(
-      {required YCPResponse3ds response,
-      required Function(String? transactionId) onSuccessfulPayment,
-      required Function(String? message) onFailedPayment}) async {
-    showModalBottomSheet(
+  /// This method is called when the payment is 3DSecure, it shows a modal bottom sheet with the [YCPWebView] widget.
+  Future on3dsPayment({
+    required YCPResponse3ds response,
+    required Function(String? transactionId) onSuccessfulPayment,
+    required Function(String? message) onFailedPayment,
+    required BuildContext context,
+  }) async {
+    return await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       isDismissible: false,
       enableDrag: false,
-      builder: (context) {
+      builder: (BuildContext builderContext) {
         return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.9,
-            child: YCPWebView(
-              onFailedPayment: (message) {
-                onFailedPayment(message);
-              },
-              onSuccessfulPayment: (transactionId) {
-                onSuccessfulPayment(transactionId);
-              },
-              response: response,
-            ));
+          height: MediaQuery.of(builderContext).size.height * 0.9,
+          child: YCPWebView(
+            onFailedPayment: (String? message) {
+              onFailedPayment(message);
+            },
+            onSuccessfulPayment: (String? transactionId) {
+              onSuccessfulPayment(transactionId);
+            },
+            response: response,
+          ),
+        );
       },
     );
   }
