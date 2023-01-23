@@ -17,6 +17,8 @@ class YCPayLocaleHandler {
 }
 
 extension YCPayLocaleExtension on YCPayLocale {
+  /// Returns the locale as a string.
+  /// For example: [YCPayLocale.english] will return "en".
   String get abbreviationName =>
       toString().split('.').last.substring(0, 2).toLowerCase();
 }
