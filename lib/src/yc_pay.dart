@@ -26,7 +26,7 @@ class YCPay {
     YCPayLocaleHandler.setLocale(locale ?? YCPayLocaleHandler.locale);
     SandboxController.setSandbox(sandbox);
 
-    _payWithCardService = PayWithCardService(context: _context);
+    _payWithCardService = PayWithCardService();
     _payWithCashPlusService = PayWithCashPlusService();
     _accountConfigService = AccountConfigService();
   }
@@ -41,11 +41,13 @@ class YCPay {
       required Function(String? transactionId) onSuccessfulPayment,
       required Function(String? message) onFailedPayment}) async {
     _payWithCardService.payWithCard(
-        token: token,
-        pubKey: _publicKey,
-        cardInformation: cardInformation,
-        onSuccessfulPayment: onSuccessfulPayment,
-        onFailedPayment: onFailedPayment);
+      token: token,
+      pubKey: _publicKey,
+      cardInformation: cardInformation,
+      onSuccessfulPayment: onSuccessfulPayment,
+      onFailedPayment: onFailedPayment,
+      context: _context,
+    );
   }
 
   void payWithCashPlus(
