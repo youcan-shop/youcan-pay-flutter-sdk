@@ -10,9 +10,13 @@ import '../models/ycp_response_3ds.dart';
 import '../models/ycp_response_sale.dart';
 import '../models/ycpay_response.dart';
 import '../widgets/ycp_webview.dart';
-import 'based_service.dart';
+import 'based_service_mixin.dart';
 
-class PayWithCardService extends BasedService {
+/// The service for the payment with a card.
+/// It is used to handle the payment with a card.
+@immutable
+@protected
+class PayWithCardService with BasedServiceMixin {
   PayWithCardService();
 
   /// Executes the payment with a given [CardInformation] object.

@@ -1,10 +1,12 @@
 import '../configs/constants.dart';
 import '../models/http_response.dart';
-import '../services/based_service.dart';
+import 'based_service_mixin.dart';
 import '../factories/account_config_factory.dart';
 import '../models/account_config.dart';
 
-class AccountConfigService extends BasedService {
+/// The service for the account configs.
+/// It is used to handle the account configs.
+class AccountConfigService with BasedServiceMixin {
   /// Returns the [AccountConfig] object if the request is successful using the [AccountConfigFactory].
   Future<AccountConfig> getAccountConfig({required String pubKey}) async {
     AccountConfig accountConfig;

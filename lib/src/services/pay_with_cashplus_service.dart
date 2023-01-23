@@ -4,11 +4,16 @@ import '../configs/constants.dart';
 import '../models/ycp_response_cashplus.dart';
 import '../models/ycp_response_sale.dart';
 import '../models/ycpay_response.dart';
-import '../services/based_service.dart';
+import 'based_service_mixin.dart';
 import '../factories/ycp_response_factory.dart';
 import '../models/http_response.dart';
+import 'package:meta/meta.dart';
 
-class PayWithCashPlusService extends BasedService {
+/// The service for the payment with CashPlus service.
+/// It is used to handle the payment with CashPlus service.
+@immutable
+@protected
+class PayWithCashPlusService with BasedServiceMixin {
   /// Executes the payment with CashPlus service with a given transaction token.
   Future<void> payWithCashPlus({
     required String token,
@@ -26,7 +31,8 @@ class PayWithCashPlusService extends BasedService {
         url: Constants.endpoints.payWithCashPlusUrl,
         body: params,
       );
-      final YCPayResponse ycPayResponse = YCPResponseFactory.fromResponse(response);
+      final YCPayResponse ycPayResponse =
+          YCPResponseFactory.fromResponse(response);
 
       if (ycPayResponse is YCPResponseCashPlus) {
         onSuccessfulPayment(ycPayResponse.transactionId, ycPayResponse.token);
