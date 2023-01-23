@@ -1,62 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:youcanpay_sdk/src/widgets/sub_widgets/cancelation_options.dart';
 import '../exceptions/invalid_response_exception.dart';
 import '../localization/ycpay_strings.dart';
 import '../models/ycp_response_3ds.dart';
 
 class YCPWebView extends StatefulWidget {
-  final Function(String? transactionId) onSuccessfulPayment;
-  final Function(String? message) onFailedPayment;
+  final void Function(String?) onSuccessfulPayment;
+  final void Function(String?) onFailedPayment;
   final YCPResponse3ds response;
 
-  const YCPWebView(
-      {Key? key,
-      required this.response,
-      required this.onSuccessfulPayment,
-      required this.onFailedPayment})
-      : super(key: key);
+  const YCPWebView({
+    super.key,
+    required this.response,
+    required this.onSuccessfulPayment,
+    required this.onFailedPayment,
+  });
 
   @override
   State<YCPWebView> createState() => _YCPWebViewState();
 }
 
 class _YCPWebViewState extends State<YCPWebView> {
-  Function(String?) get onSuccessfulPayment => widget.onSuccessfulPayment;
+  void Function(String?) get onSuccessfulPayment => widget.onSuccessfulPayment;
 
-  Function(String?) get onFailedPayment => widget.onFailedPayment;
+  void Function(String?) get onFailedPayment => widget.onFailedPayment;
 
   YCPResponse3ds get response => widget.response;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        Container(
-          width: Size.infinite.width,
-          color: Colors.white,
-          child: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    onFailedPayment(YCPayStrings.get("payment_canceled"));
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.close,
-                    color: Colors.black,
-                    size: 28,
-                  )),
-            ],
-          ),
+      children: <Widget>[
+        CancellationIconButton(
+          onCloseIconPressed: () {
+            onFailedPayment(YCPayStrings.get("payment_canceled"));
+            Navigator.pop(context);
+          },
         ),
         Expanded(
           child: WebView(
             initialUrl: response.redirectUrl,
             javascriptMode: JavascriptMode.unrestricted,
             gestureNavigationEnabled: true,
-            onPageStarted: (url) {
-              urlListener(url);
-            },
+            onPageStarted: urlListener,
           ),
         ),
       ],

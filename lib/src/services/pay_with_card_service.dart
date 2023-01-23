@@ -16,7 +16,7 @@ class PayWithCardService extends BasedService {
   PayWithCardService();
 
   /// Executes the payment with a given [CardInformation] object.
-  void payWithCard({
+  Future<void> payWithCard({
     required String token,
     required String pubKey,
     required CardInformation cardInformation,
