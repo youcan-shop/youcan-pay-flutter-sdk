@@ -12,7 +12,7 @@ class AccountConfigService with BasedServiceMixin {
     AccountConfig accountConfig;
     try {
       final HttpResponse response = await httpAdapter.get(
-        url: Constants.endpoints.configUrl + pubKey,
+        url: Constants.endpoints.keyConfigUrl(pubKey),
       );
       accountConfig = AccountConfigFactory.fromResponse(response);
     } catch (e) {

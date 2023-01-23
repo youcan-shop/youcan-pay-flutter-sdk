@@ -17,6 +17,8 @@ import 'based_service_mixin.dart';
 @immutable
 @protected
 class PayWithCardService with BasedServiceMixin {
+  /// The constructor of the [PayWithCardService] class.
+  /// It is used to initialize the an instance of the class.
   PayWithCardService();
 
   /// Executes the payment with a given [CardInformation] object.
@@ -24,9 +26,9 @@ class PayWithCardService with BasedServiceMixin {
     required String token,
     required String pubKey,
     required CardInformation cardInformation,
-    required Function(String? transactionId) onSuccessfulPayment,
-    required Function(String? message) onFailedPayment,
     required BuildContext context,
+    required void Function(String? transactionId) onSuccessfulPayment,
+    required void Function(String? message) onFailedPayment,
   }) async {
     final Map<String, String> params =
         CardInformationFactory.toMap(cardInformation)
@@ -42,56 +44,59 @@ class PayWithCardService with BasedServiceMixin {
       YCPayResponse ycPayResponse = YCPResponseFactory.fromResponse(response);
 
       if (ycPayResponse is YCPResponseSale) {
-        if (ycPayResponse.success) {
-          onSuccessfulPayment(ycPayResponse.transactionId);
-        } else {
-          onFailedPayment(ycPayResponse.message);
-        }
-
-        return;
-      }
-
-      if (ycPayResponse is YCPResponse3ds) {
-        on3dsPayment(
+        _handleYCPayResponse(
+          ycPayResponse,
+          onFail: onFailedPayment,
+          onSuccess: onSuccessfulPayment,
+        );
+      } else if (ycPayResponse is YCPResponse3ds) {
+        _handle3dsPayment(
           context: context,
           onFailedPayment: onFailedPayment,
           onSuccessfulPayment: onSuccessfulPayment,
           response: ycPayResponse,
         );
-
-        return;
       }
     } catch (e) {
       onFailedPayment(e.toString());
     }
   }
 
-  /// This method is called when the payment is 3DSecure, it shows a modal bottom sheet with the [YCPWebView] widget.
-  Future on3dsPayment({
+  /// This method handles a [YCPResponse3ds] , it shows a modal bottom sheet with a [YCPWebView] widget.
+  Future<T?> _handle3dsPayment<T>({
     required YCPResponse3ds response,
-    required Function(String? transactionId) onSuccessfulPayment,
-    required Function(String? message) onFailedPayment,
     required BuildContext context,
+    required void Function(String? transactionId) onSuccessfulPayment,
+    required void Function(String? message) onFailedPayment,
   }) async {
     return await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       isDismissible: false,
       enableDrag: false,
-      builder: (BuildContext builderContext) {
-        return SizedBox(
-          height: MediaQuery.of(builderContext).size.height * 0.9,
-          child: YCPWebView(
-            onFailedPayment: (String? message) {
-              onFailedPayment(message);
-            },
-            onSuccessfulPayment: (String? transactionId) {
-              onSuccessfulPayment(transactionId);
-            },
-            response: response,
-          ),
+      builder: (_) {
+        return YCPWebView(
+          onFailedPayment: onFailedPayment,
+          onSuccessfulPayment: onSuccessfulPayment,
+          response: response,
         );
       },
     );
+  }
+}
+
+/// This method handles the [YCPayResponse] object.
+/// It checks if the payment is successful or not.
+/// If it is successful, it calls the [onSuccess] callback.
+/// If it is not successful, it calls the [onFail] callback.
+void _handleYCPayResponse(
+  YCPResponseSale response, {
+  required void Function(String? transactionId) onSuccess,
+  required void Function(String? message) onFail,
+}) {
+  if (response.success) {
+    onSuccess(response.transactionId);
+  } else {
+    onFail(response.message);
   }
 }

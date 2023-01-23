@@ -27,4 +27,9 @@ class YouCanPayAPIEndpoints {
   String baseUrlBasedOnSandBox() {
     return SandboxController.isSandbox ? sandboxBasedUrl : baseUrl;
   }
+
+  /// The endpoint builder for the account config url with the given [pubKey].
+  String keyConfigUrl(String pubKey) {
+    return configUrl + pubKey;
+  }
 }
