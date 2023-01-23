@@ -1,19 +1,21 @@
+import 'package:flutter/widgets.dart';
+
 import '../models/http_response.dart';
 import 'package:dio/dio.dart';
 import '../configs/constants.dart';
 import '../controllers/sandbox_controller.dart';
 import 'http_adapter.dart';
 
+@immutable
+@protected
 class DioHttpAdapter implements HttpAdapter {
   // The internal [Dio] instance.
-  late Dio _dio;
+  late final Dio _dio;
 
-  // This is a private (encapsulated) constructor, so it can only be called from within the class.
+  // This is a private constructor, so it can only be called from within the class.
   DioHttpAdapter._() {
-    String basedUrl = SandboxController.isSandbox
-        ? Constants.sandboxBasedUrl
-        : Constants.baseUrl;
-    Map<String, dynamic> headers = Constants.headers;
+    final String basedUrl = Constants.endpoints.baseUrlBasedOnSandBox();
+    final Map<String, dynamic> headers = Constants.headers.jsonLocalized();
 
     _dio = Dio(
       BaseOptions(

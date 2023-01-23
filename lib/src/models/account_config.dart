@@ -1,15 +1,33 @@
 import 'package:meta/meta.dart';
 
+/// Represents the account configuration.
 @immutable
 class AccountConfig {
+  /// The [success] status of the request.
   final bool success;
+
+  /// The [message] of the request.
   final String message;
+
+  /// Represents if the account accepts credit cards.
   final bool acceptsCreditCards;
+
+  /// Represents if the account accepts Cash plus.
   final bool acceptsCashPlus;
+
+  /// Represents if the account accepts Cash plus transactions.
   final bool cashPlusTransactionEnabled;
+
+  /// Represents if the account accepts YouCanPay Wallet.
   final bool acceptsYouCanPayWallet;
+
+  /// Represents if the account accepts YouCanPay Wallet transactions.
   final bool walletTransactionEnabled;
+
+  /// Represents if the account has the help center enabled.
   final bool helpCenterEnabled;
+
+  /// Represents if the account has the payments active.
   final bool paymentsActive;
 
   /// Creates a new [AccountConfig] object.
@@ -32,9 +50,9 @@ class AccountConfig {
   }) {
     return AccountConfig(
       success: success,
-      acceptsCreditCards: map["acceptsCreditCards"],
-      acceptsCashPlus: map["acceptsCashPlus"],
-      cashPlusTransactionEnabled: map["cashPlusTransactionEnabled"],
+      acceptsCreditCards: map["acceptsCreditCards"] ?? false,
+      acceptsCashPlus: map["acceptsCashPlus"] ?? false,
+      cashPlusTransactionEnabled: map["cashPlusTransactionEnabled"] ?? false,
       acceptsYouCanPayWallet: map["acceptsYouCanPayWallet"] ?? false,
       walletTransactionEnabled: map["walletTransactionEnabled"] ?? false,
       helpCenterEnabled: map["helpCenterEnabled"] ?? false,
@@ -43,7 +61,7 @@ class AccountConfig {
     );
   }
 
-  /// Creates a new [AccountConfig] object from a [String].
+  /// Creates a new [AccountConfig] object from a [message].
   factory AccountConfig.fromMessage(
     String message, {
     required bool success,
@@ -59,6 +77,7 @@ class AccountConfig {
   }
 
   /// Copy the current [AccountConfig] object with the given fields replaced with the new values.
+  @protected
   AccountConfig copyWith({
     bool? success,
     String? message,

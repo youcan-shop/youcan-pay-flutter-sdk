@@ -1,3 +1,4 @@
+/// Exception thrown when the decoded JSON is invalid.
 class InvalidDecodedJSONException implements Exception {
   final String message;
 

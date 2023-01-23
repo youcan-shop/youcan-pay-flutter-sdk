@@ -2,12 +2,22 @@
 import '../validators/card_information_validator.dart';
 import 'package:meta/meta.dart';
 
+/// The card information model.
 @immutable
 class CardInformation {
+  /// The card holder/owner name.
   final String cardHolderName;
+
+  /// The card number.
   final String cardNumber;
+
+  /// The card expire date year.
   final String expireDateYear;
+
+  /// The card expire date month.
   final String expireDateMonth;
+
+  /// The card CVV.
   final String cvv;
 
   /// Creates a new [CardInformation] object.
@@ -32,6 +42,19 @@ class CardInformation {
   }
 
   /// Returns the [expireDateMonth] and [expireDateYear] in the format MM/YY.
+  /// Example:
+  /// ```dart
+  /// final CardInformation cardInformation = CardInformation(
+  ///  cardHolderName: "John Doe",
+  /// cardNumber: "1234567890123456",
+  /// expireDateYear: "2021",
+  /// expireDateMonth: "12",
+  /// cvv: "123",
+  /// );
+  ///
+  /// print(cardInformation.formattedExpireDate); // 12/21
+  /// ```
+  ///
   String get formattedExpireDate {
     final String padLeftMonth = expireDateMonth.padLeft(2, "0");
     final String padLeftYear = expireDateYear.padLeft(2, "0");
@@ -44,6 +67,7 @@ class CardInformation {
   }
 
   /// Copy the current [CardInformation] object with the given parameters.
+  @protected
   CardInformation copyWith({
     String? cardHolderName,
     String? cardNumber,
@@ -59,7 +83,6 @@ class CardInformation {
       cvv: cvv ?? this.cvv,
     );
   }
-
 
   @override
   bool operator ==(covariant CardInformation other) {

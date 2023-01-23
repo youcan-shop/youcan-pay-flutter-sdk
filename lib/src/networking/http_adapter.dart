@@ -1,5 +1,8 @@
 import '../models/http_response.dart';
+import 'package:meta/meta.dart';
 
+@immutable
+@protected
 abstract class HttpAdapter {
   /// Sends a POST request to the given [url] with the given [body].
   Future<HttpResponse> post({

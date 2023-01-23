@@ -30,23 +30,26 @@ class _YCPWebViewState extends State<YCPWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        CancellationIconButton(
-          onCloseIconPressed: () {
-            onFailedPayment(YCPayStrings.get("payment_canceled"));
-            Navigator.pop(context);
-          },
-        ),
-        Expanded(
-          child: WebView(
-            initialUrl: response.redirectUrl,
-            javascriptMode: JavascriptMode.unrestricted,
-            gestureNavigationEnabled: true,
-            onPageStarted: urlListener,
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.9,
+      child: Column(
+        children: <Widget>[
+          CancellationIconButton(
+            onCloseIconPressed: () {
+              onFailedPayment(YCPayStrings.get("payment_canceled"));
+              Navigator.pop(context);
+            },
           ),
-        ),
-      ],
+          Expanded(
+            child: WebView(
+              initialUrl: response.redirectUrl,
+              javascriptMode: JavascriptMode.unrestricted,
+              gestureNavigationEnabled: true,
+              onPageStarted: urlListener,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
