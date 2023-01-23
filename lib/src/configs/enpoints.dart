@@ -1,5 +1,7 @@
 import "package:meta/meta.dart";
 
+import '../controllers/sandbox_controller.dart';
+
 @immutable
 class YouCanPayAPIEndpoints {
   const YouCanPayAPIEndpoints();
@@ -18,4 +20,11 @@ class YouCanPayAPIEndpoints {
 
   /// The base endpoint for the payment with cash plus.
   String get payWithCashPlusUrl => "api/cashplus/init/";
+
+  /// The base url builder based on the sandbox mode.
+  /// If the sandbox mode is enabled, it will return the [sandboxBasedUrl] url.
+  /// Otherwise, it will return the [baseUrl] url.
+  String baseUrlBasedOnSandBox() {
+    return SandboxController.isSandbox ? sandboxBasedUrl : baseUrl;
+  }
 }

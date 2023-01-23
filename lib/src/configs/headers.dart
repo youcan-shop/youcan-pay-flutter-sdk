@@ -5,16 +5,20 @@ import 'package:meta/meta.dart';
 class YouCanPayAPIHeaders {
   const YouCanPayAPIHeaders();
 
+  /// The default headers for the API requests.
+  /// it does only defines the **Content-Type** and **Accept** headers.
+  Map<String, dynamic> get defaultHeaders => <String, String>{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      };
+
   /// The headers for the API requests, with the localization header included.
-  Map<String, dynamic> get jsonLocalized {
+  Map<String, dynamic> jsonLocalized() {
     final String headerLocale = YCPayLocaleHandler.locale.abbreviationName;
 
     assert(headerLocale.length == 2, "Locale must be 2 characters long");
-
-    return <String, String>{
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "X-Preferred-Locale": headerLocale,
-    };
+    final localizedDefaultHeaders = Map<String, dynamic>.from(defaultHeaders)
+      ..addAll({"Accept-Language": headerLocale});
+    return localizedDefaultHeaders;
   }
 }
