@@ -7,30 +7,39 @@ import 'controllers/sandbox_controller.dart';
 import 'services/pay_with_card_service.dart';
 import 'services/pay_with_cashplus_service.dart';
 
+@immutable
 class YCPay {
-  late final String _publicKey;
-  late PayWithCardService _payWithCardService;
-  late PayWithCashPlusService _payWithCashPlusService;
-  late AccountConfigService _accountConfigService;
+  /// The public key of your account.
+  final String publicKey;
+
+  /// The public sandbox mode boolean.
+  final bool sandbox;
+
+  /// The used locale for the SDK, if not provided, the default locale [YCPayLocale.english] will be applied.
+
+  /// The available locales are:
+  /// * For english use [YCPayLocale.english].
+  /// * For french use [YCPayLocale.french].
+  /// * For arabic use [YCPayLocale.arabic].
+  final YCPayLocale? locale;
+
+  late final PayWithCardService _payWithCardService;
+  late final PayWithCashPlusService _payWithCashPlusService;
+  late final AccountConfigService _accountConfigService;
 
   YCPay({
-    required String publicKey,
-    bool sandbox = false,
-    YCPayLocale? locale,
+    required this.publicKey,
+    this.locale = YCPayLocale.english,
+    this.sandbox = false,
   }) {
-    _publicKey = publicKey;
-
     YCPayLocaleHandler.setLocale(locale ?? YCPayLocaleHandler.locale);
     SandboxController.setSandbox(sandbox);
-
-    _payWithCardService = PayWithCardService();
-    _payWithCashPlusService = PayWithCashPlusService();
-    _accountConfigService = AccountConfigService();
+    _initializeServices();
   }
 
   /// Fetch the account configuration, and returns an [AccountConfig] object.
   Future<AccountConfig> getAccountConfig() async {
-    return await _accountConfigService.getAccountConfig(pubKey: _publicKey);
+    return await _accountConfigService.getAccountConfig(pubKey: publicKey);
   }
 
   /// Executes the payment with a given [CardInformation] object.
@@ -43,7 +52,7 @@ class YCPay {
   }) async {
     _payWithCardService.payWithCard(
       token: token,
-      pubKey: _publicKey,
+      pubKey: publicKey,
       cardInformation: cardInformation,
       onSuccessfulPayment: onSuccessfulPayment,
       onFailedPayment: onFailedPayment,
@@ -60,9 +69,16 @@ class YCPay {
   }) async {
     return await _payWithCashPlusService.payWithCashPlus(
       token: token,
-      pubKey: _publicKey,
+      pubKey: publicKey,
       onSuccessfulPayment: onSuccessfulPayment,
       onFailedPayment: onFailedPayment,
     );
+  }
+
+  // initialize the services of the SDK, this is called in the constructor.
+  void _initializeServices() {
+    _payWithCardService = PayWithCardService();
+    _payWithCashPlusService = PayWithCashPlusService();
+    _accountConfigService = AccountConfigService();
   }
 }
