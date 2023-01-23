@@ -1,4 +1,5 @@
 import 'package:youcanpay_sdk/src/validators/card_information_validator.dart';
+import 'package:youcanpay_sdk/src/validators/extensions/map.dart';
 
 import '../exceptions/invalid_decoded_json_exception.dart';
 import '../exceptions/invalid_response_exception.dart';
