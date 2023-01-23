@@ -2,6 +2,8 @@ import "package:meta/meta.dart";
 
 @immutable
 class YouCanPayAPIEndpoints {
+  const YouCanPayAPIEndpoints();
+
   /// The base URL for the API.
   String get baseUrl => "https://youcanpay.com/";
 
