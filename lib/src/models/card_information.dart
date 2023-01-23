@@ -80,4 +80,15 @@ class CardInformation {
         expireDateMonth.hashCode ^
         cvv.hashCode;
   }
+
+  factory CardInformation.testCard(Map<String, dynamic> json) {
+    return CardInformation(
+      cardHolderName: json['cardHolderName'] as String,
+      cardNumber: json['cardNumber'] as String,
+      expireDateYear: json['expireDateYear'] as String,
+      expireDateMonth: json['expireDateMonth'] as String,
+      cvv: json['cvv'] as String,
+    );
+  }
 }
+

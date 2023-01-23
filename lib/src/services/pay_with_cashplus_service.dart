@@ -23,7 +23,7 @@ class PayWithCashPlusService extends BasedService {
 
     try {
       HttpResponse response = await httpAdapter.post(
-        url: Constants.payWithCashPlusUrl,
+        url: Constants.endpoints.payWithCashPlusUrl,
         body: params,
       );
       final YCPayResponse ycPayResponse = YCPResponseFactory.fromJSON(response);

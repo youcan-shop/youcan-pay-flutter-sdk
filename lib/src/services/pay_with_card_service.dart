@@ -32,7 +32,7 @@ class PayWithCardService extends BasedService {
 
     try {
       HttpResponse response = await httpAdapter.post(
-        url: Constants.payWithCardUrl,
+        url: Constants.endpoints.payWithCardUrl,
         body: params,
       );
       YCPayResponse ycPayResponse = YCPResponseFactory.fromJSON(response);

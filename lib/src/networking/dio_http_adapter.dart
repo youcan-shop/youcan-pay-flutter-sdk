@@ -11,9 +11,9 @@ class DioHttpAdapter implements HttpAdapter {
   // This is a private (encapsulated) constructor, so it can only be called from within the class.
   DioHttpAdapter._() {
     String basedUrl = SandboxController.isSandbox
-        ? Constants.sandboxBasedUrl
-        : Constants.baseUrl;
-    Map<String, dynamic> headers = Constants.headers;
+        ? Constants.endpoints.sandboxBasedUrl
+        : Constants.endpoints.baseUrl;
+    Map<String, dynamic> headers = Constants.headers.jsonLocalized;
 
     _dio = Dio(
       BaseOptions(
