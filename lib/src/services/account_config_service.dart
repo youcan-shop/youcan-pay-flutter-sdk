@@ -14,7 +14,7 @@ class AccountConfigService extends BasedService {
       );
       accountConfig = AccountConfigFactory.fromResponse(response);
     } catch (e) {
-      accountConfig = AccountConfig(success: false, message: e.toString());
+      accountConfig = AccountConfig.fromMessage(e.toString(), success: false);
     }
 
     return accountConfig;
