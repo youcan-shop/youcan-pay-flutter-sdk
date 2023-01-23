@@ -60,6 +60,7 @@ class CardInformation {
     );
   }
 
+
   @override
   bool operator ==(covariant CardInformation other) {
     if (identical(this, other)) return true;
