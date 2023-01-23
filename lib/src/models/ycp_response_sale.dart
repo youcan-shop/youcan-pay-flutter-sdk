@@ -3,8 +3,13 @@ import 'ycpay_response.dart';
 
 @immutable
 class YCPResponseSale extends YCPayResponse {
+  /// The success status.
   final bool success;
+
+  /// The message of the response.
   final String message;
+
+  /// the status code of the response.
   final String code;
 
   /// Creates a new [YCPResponseSale] object.
@@ -25,6 +30,7 @@ class YCPResponseSale extends YCPayResponse {
     );
   }
 
+  /// Creates a new failure [YCPResponseSale] object from a [message].
   factory YCPResponseSale.failure(String message) {
     return YCPResponseSale(
       transactionId: "",
@@ -38,6 +44,7 @@ class YCPResponseSale extends YCPayResponse {
       'YCPResponseSale(success: $success, message: $message, code: $code)';
 
   /// Copy this object with the given fields replaced with the new values.
+  @protected
   YCPResponseSale copyWith({
     bool? success,
     String? message,

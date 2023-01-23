@@ -1,8 +1,10 @@
 import 'ycpay_response.dart';
 import 'package:meta/meta.dart';
 
+/// This class represents the response of a cash plus payment.
 @immutable
 class YCPResponseCashPlus extends YCPayResponse {
+  /// The payment token.
   final String token;
 
   /// Creates a new [YCPResponseCashPlus] object.
@@ -23,6 +25,7 @@ class YCPResponseCashPlus extends YCPayResponse {
   String toString() => 'YCPResponseCashPlus(token: $token)';
 
   /// Copy this object with the given fields replaced with the new values.
+  @protected
   YCPResponseCashPlus copyWith({
     String? token,
   }) {

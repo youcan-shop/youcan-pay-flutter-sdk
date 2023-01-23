@@ -1,11 +1,17 @@
+import 'package:meta/meta.dart';
 import 'ycpay_response.dart';
 
+/// This class represents the response of a 3ds payment.
+@immutable
 class YCPResponse3ds extends YCPayResponse {
-  String redirectUrl;
-  String returnUrl;
+  /// The redirect url.
+  final String redirectUrl;
+
+  /// The return url.
+  final String returnUrl;
 
   /// Creates a new [YCPResponse3ds] object.
-  YCPResponse3ds({
+  const YCPResponse3ds({
     required this.redirectUrl,
     required this.returnUrl,
   });
@@ -22,6 +28,7 @@ class YCPResponse3ds extends YCPayResponse {
       'YCPResponse3ds(redirectUrl: $redirectUrl, returnUrl: $returnUrl)';
 
   /// Creates a new [YCPResponse3ds] object with the same properties as this instance,
+  @protected
   YCPResponse3ds copyWith({
     String? redirectUrl,
     String? returnUrl,
