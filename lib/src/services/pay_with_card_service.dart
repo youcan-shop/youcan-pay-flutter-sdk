@@ -35,7 +35,7 @@ class PayWithCardService extends BasedService {
         url: Constants.endpoints.payWithCardUrl,
         body: params,
       );
-      YCPayResponse ycPayResponse = YCPResponseFactory.fromJSON(response);
+      YCPayResponse ycPayResponse = YCPResponseFactory.fromResponse(response);
 
       if (ycPayResponse is YCPResponseSale) {
         if (ycPayResponse.success) {

@@ -24,6 +24,15 @@ class YCPResponseSale extends YCPayResponse {
       code: map['code'] ?? "",
     );
   }
+
+  factory YCPResponseSale.failure(String message) {
+    return YCPResponseSale(
+      transactionId: "",
+      success: false,
+      code: "-1",
+      message: message,
+    );
+  }
   @override
   String toString() =>
       'YCPResponseSale(success: $success, message: $message, code: $code)';

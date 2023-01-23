@@ -26,7 +26,7 @@ class PayWithCashPlusService extends BasedService {
         url: Constants.endpoints.payWithCashPlusUrl,
         body: params,
       );
-      final YCPayResponse ycPayResponse = YCPResponseFactory.fromJSON(response);
+      final YCPayResponse ycPayResponse = YCPResponseFactory.fromResponse(response);
 
       if (ycPayResponse is YCPResponseCashPlus) {
         onSuccessfulPayment(ycPayResponse.transactionId, ycPayResponse.token);
