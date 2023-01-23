@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youcanpay_sdk/src/validators/card_information_validator.dart';
+import 'package:youcanpay_sdk/src/validators/extensions/map.dart';
 
 import '../../youcanpay_sdk.dart';
 import '../configs/constants.dart';

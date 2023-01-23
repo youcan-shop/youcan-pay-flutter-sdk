@@ -1,4 +1,5 @@
 import 'package:youcanpay_sdk/src/validators/card_information_validator.dart';
+import 'package:youcanpay_sdk/src/validators/extensions/map.dart';
 
 import '../configs/constants.dart';
 import '../models/ycp_response_cashplus.dart';
