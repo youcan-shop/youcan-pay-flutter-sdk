@@ -7,6 +7,8 @@ import 'controllers/sandbox_controller.dart';
 import 'services/pay_with_card_service.dart';
 import 'services/pay_with_cashplus_service.dart';
 
+/// The main class of the SDK, used to initialize the SDK and execute the payments.
+///
 @immutable
 class YCPay {
   /// The public key of your account.
