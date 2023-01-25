@@ -1,6 +1,7 @@
 import 'package:youcanpay_sdk/src/localization/strings/strings.dart';
 import '../exceptions/invalid_locale_exception.dart';
-import 'ycpay_locale.dart';
+import 'local/enum.dart';
+import 'local/ycpay_locale.dart';
 
 /// This class is used to manage the strings of the app.
 class YCPayStrings {

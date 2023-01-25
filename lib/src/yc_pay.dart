@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'localization/ycpay_locale.dart';
+import 'localization/local/enum.dart';
+import 'localization/local/ycpay_locale.dart';
 import 'models/account_config.dart';
 import 'models/card_information.dart';
 import 'services/account_config_service.dart';

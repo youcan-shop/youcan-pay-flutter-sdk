@@ -1,4 +1,4 @@
-import '../localization/ycpay_locale.dart';
+import '../localization/local/ycpay_locale.dart';
 import 'package:meta/meta.dart';
 
 @immutable
