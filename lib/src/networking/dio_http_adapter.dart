@@ -65,22 +65,22 @@ class DioHttpAdapter implements HttpAdapter {
     Response response;
     HttpResponse httpResponse;
 
-    try {
+    // try {
       response = await _dio.post(
         url,
-        data: body,
+        data: FormData.fromMap(body),
       );
       httpResponse = HttpResponse(
         body: response.data,
         statusCode: response.statusCode!,
       );
-    } on DioError catch (e) {
-      httpResponse = HttpResponse(
-        body: e.response?.data ?? {},
-        statusCode: e.response?.statusCode ?? -1,
-        message: e.message,
-      );
-    }
+    // } on DioError catch (e) {
+    //   httpResponse = HttpResponse(
+    //     body: e.response?.data ?? {},
+    //     statusCode: e.response?.statusCode ?? -1,
+    //     message: e.message,
+    //   );
+    // }
 
     return httpResponse;
   }

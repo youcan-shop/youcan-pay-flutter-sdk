@@ -34,8 +34,8 @@ class PayWithCardService with BasedServiceMixin {
     final Map<String, String> params =
         CardInformationFactory.toMap(cardInformation)
           ..token(token)
-          ..pubKey(pubKey)
-          ..isMobile("1");
+          ..pubKey(pubKey);
+    // ..isMobile("1");
 
     try {
       HttpResponse response = await httpAdapter.post(

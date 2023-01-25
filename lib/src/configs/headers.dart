@@ -8,7 +8,6 @@ class YouCanPayAPIHeaders {
   /// The default headers for the API requests.
   /// it does only defines the **Content-Type** and **Accept** headers.
   Map<String, dynamic> get defaultHeaders => <String, String>{
-        "Content-Type": "application/json",
         "Accept": "application/json",
       };
 

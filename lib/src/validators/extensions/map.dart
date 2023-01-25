@@ -24,7 +24,7 @@ extension ResponseMapValidationExtension on Map<String, dynamic> {
 
   /// Inserts the token to the [Map<String, dynamic>].
   void token(String token) {
-    this["token"] = token;
+    this["token_id"] = token;
   }
 
   /// Inserts the pubKey to the [Map<String, dynamic>].

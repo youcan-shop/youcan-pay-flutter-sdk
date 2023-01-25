@@ -53,7 +53,7 @@ class YCPay {
     required Function(String? message) onFailedPayment,
     required BuildContext context,
   }) async {
-    _payWithCardService.payWithCard(
+    await _payWithCardService.payWithCard(
       token: token,
       pubKey: publicKey,
       cardInformation: cardInformation,
